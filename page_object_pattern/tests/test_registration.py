@@ -16,15 +16,11 @@ class TestRegistration:
         assert_that(self.registration.invalid_mail_error()).contains("Invalid email address.")
 
     @pytest.mark.usefixtures('setup')
-    def test_sing_in_negative2():
-        self.driver.find_element_by_class_name(signin_button()).click()
-        self.driver.find_element_by_name(email_field()).send_keys("asd2@asd.pl")
-        self.driver.find_element_by_css_selector(createAccount_button()).click()
-        reg_form_label = self.driver.find_element_by_css_selector(registration_form())
-        assert reg_form_label.text == "YOUR PERSONAL INFORMATION"
-        self.driver.find_element_by_id(register_button()).click()
-        error = self.driver.find_element_by_css_selector(registration_error())
-        assert error.text == 'There are 8 errors'
+    def test_sing_in_negative2(self, setup):
+        self.registration.enter_email()
+        assert_that(self.registration.registration_screen()).contains('YOUR PERSONAL INFORMATION')
+        self.registration.register_account()
+        assert_that(self.registration.registration_error()).contains('There are 8 errors')
 
     @pytest.mark.usefixtures('setup')
     def test_sing_in_negative3():

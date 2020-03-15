@@ -42,3 +42,18 @@ class Registration:
         element = self.driver.find_element_by_css_selector(self.invalidEmail_error_css)
         return element.text
 
+    def enter_email(self):
+        self.driver.find_element_by_class_name(self.signin_button_css).click()
+        self.driver.find_element_by_name(self.email_field_css).send_keys("asd2@asd.pl")
+        self.driver.find_element_by_css_selector(self.createAccount_btn_css).click()
+
+    def register_account(self):
+        self.driver.find_element_by_id(self.register_button_css).click()
+
+    def registration_screen(self):
+        reg_form_label = self.driver.find_element_by_css_selector(self.registration_form_css)
+        return reg_form_label.text
+
+    def registration_error(self):
+        error = self.driver.find_element_by_css_selector(self.registration_error_css)
+        return error.text
