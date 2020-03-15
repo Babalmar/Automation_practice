@@ -4,6 +4,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.wait import WebDriverWait
 from page_object_pattern.pages.shopping_cart import ShoppingCart
+from page_object_pattern.pages.main_page import Registration
 from selenium.webdriver.chrome.options import Options
 
 
@@ -18,6 +19,8 @@ def setup(request):
     request.cls.driver = driver
     request.cls.wait = WebDriverWait(driver, 15)
     request.cls.shoppingCart = ShoppingCart(driver)
+    request.cls.registration = Registration(driver)
+    # request.cls.login = Login(driver)
     yield
     time.sleep(2)
     driver.quit()

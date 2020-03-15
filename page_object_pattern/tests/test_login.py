@@ -5,7 +5,6 @@ from Generator import Data_generator as dg
 
 @pytest.mark.usefixtures('setup')
 def test_log_in_negative():
-    pytest.driver.get('http://automationpractice.com/index.php')
     pytest.driver.find_element_by_class_name(loc.signin_button()).click()
     auth_label = pytest.driver.find_element_by_css_selector(loc.loginform_header())
     assert auth_label.text == "ALREADY REGISTERED?"
@@ -17,7 +16,6 @@ def test_log_in_negative():
 
 @pytest.mark.usefixtures('setup')
 def test_log_in_positive():
-    pytest.driver.get('http://automationpractice.com/index.php')
     pytest.driver.find_element_by_class_name(loc.signin_button()).click()
     auth_label = pytest.driver.find_element_by_css_selector(loc.loginform_header())
     assert auth_label.text == "ALREADY REGISTERED?"
