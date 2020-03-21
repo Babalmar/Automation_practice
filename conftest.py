@@ -1,7 +1,7 @@
 import pytest
 import time
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.wait import WebDriverWait
 from page_object_pattern.pages.login import Login
 from page_object_pattern.pages.shopping_cart import ShoppingCart
@@ -13,7 +13,8 @@ from selenium.webdriver.chrome.options import Options
 def setup(request):
     options = Options()
     options.headless = True
-    driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+    driver = webdriver.Chrome('page_object_pattern/tests/helpers/chromedriver', chrome_options=options)
+    # driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get('http://automationpractice.com/index.php')
     driver.maximize_window()
     driver.implicitly_wait(10)
