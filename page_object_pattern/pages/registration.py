@@ -75,4 +75,10 @@ class Registration:
 
     def account_landing_page(self):
         my_account = self.driver.find_element_by_css_selector(self.account_page_css)
-        assert my_account.text
+        return my_account.text
+
+    @staticmethod
+    def random_mail():
+        import random
+        email = 'mobiy' + str(random.randint(43455, 99000)) + '@cityroyal.org'
+        return email

@@ -1,6 +1,7 @@
 import pytest
 import allure
 from assertpy import assert_that
+from page_object_pattern.pages.registration import Registration
 
 
 @pytest.mark.usefixtures('setup')
@@ -35,7 +36,7 @@ class TestRegistration:
     @allure.title('Register account - positive')
     def test_sing_in_positive(self, setup):
         self.registration.click_signin()
-        self.registration.enter_email('mobiy43452@cityroyal.org')
+        self.registration.enter_email(Registration.random_mail())
         self.registration.create_account()
         self.registration.populate_registration_form()
         self.registration.register_account()
