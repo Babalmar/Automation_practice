@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.options import Options
 def setup(request):
     options = Options()
     options.headless = True
-    driver = webdriver.Chrome('/page_object_pattern/tests/helpers/chromedriver', chrome_options=options)
+    driver = webdriver.Chrome('helpers/chromedriver', chrome_options=options)
     # driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get('http://automationpractice.com/index.php')
     driver.maximize_window()
