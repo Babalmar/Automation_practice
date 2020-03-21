@@ -12,6 +12,7 @@ from selenium.webdriver.chrome.options import Options
 @pytest.fixture()
 def setup(request):
     options = Options()
+    options.add_argument("--no-sandbox")
     options.headless = True
     driver = webdriver.Chrome('helpers/chromedriver', chrome_options=options)
     # driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
