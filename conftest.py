@@ -13,6 +13,7 @@ from selenium.webdriver.chrome.options import Options
 def setup(request):
     options = Options()
     options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
     options.headless = True
     driver = webdriver.Chrome('helpers/chromedriver', chrome_options=options)
     # driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
