@@ -1,28 +1,31 @@
 import pytest
-from locators import main_page as loc
-from Generator import Data_generator as dg
+import allure
+from assertpy import assert_that
 
 
 @pytest.mark.usefixtures('setup')
-def test_log_in_negative():
-    pytest.driver.find_element_by_class_name(loc.signin_button()).click()
-    auth_label = pytest.driver.find_element_by_css_selector(loc.loginform_header())
-    assert auth_label.text == "ALREADY REGISTERED?"
-    pytest.driver.find_element_by_id(loc.registered_email()).send_keys("avcdf")
-    pytest.driver.find_element_by_id(loc.registered_passwd()).send_keys("asd12")
-    pytest.driver.find_element_by_css_selector(loc.createAccount_button()).click()
-    email_alert = pytest.driver.find_element_by_css_selector(".alert.alert-danger li")
-    assert email_alert.text == "Invalid email address."
+@allure.parent_suite('Login')
+@allure.description("Tests validating proper login behaviour")
+class TestLogin:
 
-@pytest.mark.usefixtures('setup')
-def test_log_in_positive():
-    pytest.driver.find_element_by_class_name(loc.signin_button()).click()
-    auth_label = pytest.driver.find_element_by_css_selector(loc.loginform_header())
-    assert auth_label.text == "ALREADY REGISTERED?"
-    pytest.driver.find_element_by_id(loc.registered_email()).send_keys('mobiy43403@cityroyal.org')
-    pytest.driver.find_element_by_id(loc.registered_passwd()).send_keys('qwerty123')
-    pytest.driver.find_element_by_css_selector(loc.createAccount_button()).click()
-    my_account = pytest.driver.find_element_by_css_selector(loc.account_page())
-    assert my_account.text == 'MY ACCOUNT'
+    @allure.title('Login with invalid email address')
+    def test_log_in_incorrect_email(self, setup):
+        self.login.click_signin_btn()
+        self.login.enter_credentials('asd', 'sddd')
+        assert_that(self.login.display_email_alert()).contains('Invalid email address.')
+
+    @allure.title('Login with invalid password')
+    def test_log_in_incorrect_password(self, setup):
+        self.login.click_signin_btn()
+        self.login.enter_credentials('asd@sd.pl', 'sddd')
+        assert_that(self.login.display_email_alert()).contains('Invalid password.')
+
+    @allure.title('Login with valid email address / password')
+    def test_log_in_valid_credentials(self, setup):
+        self.login.click_signin_btn()
+        self.login.enter_credentials('mobiy43403@cityroyal.org', 'qwerty123')
+        assert_that(self.login.display_my_account()).contains('MY ACCOUNT')
+
+
 
 
