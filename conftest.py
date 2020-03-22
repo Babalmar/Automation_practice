@@ -11,12 +11,11 @@ from selenium.webdriver.chrome.options import Options
 
 @pytest.fixture()
 def setup(request):
-    options = Options()
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.headless = True
-    driver = webdriver.Chrome('helpers/chromedriver', chrome_options=options)
-    # driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+    options = webdriver.ChromeOptions()
+    options.set_capability('browseName', 'Chrome')
+    options.add_argument('headless')
+    options.add_argument('start-maximized')
+    driver = webdriver.Remote('http://localhost:4444/wd/hub', options=options)
     driver.get('http://automationpractice.com/index.php')
     driver.maximize_window()
     driver.implicitly_wait(10)
