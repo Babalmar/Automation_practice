@@ -1,7 +1,7 @@
 import pytest
 import allure
 from assertpy import assert_that
-from page_object_pattern.pages.registration import Registration
+# from page_object_pattern.pages.registration_page import Registration
 
 
 @pytest.mark.usefixtures('setup')

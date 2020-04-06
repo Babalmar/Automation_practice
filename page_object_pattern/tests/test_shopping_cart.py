@@ -8,16 +8,8 @@ from assertpy import assert_that
 @allure.description("Tests validating proper shopping cart behaviour")
 class TestShoppingCart:
 
-    @allure.title('First launch, basket empty - not logged')
-    def test_shopping_cart_empty_not_logged(self, setup):
-        # check the contents of the cart visible on the main page - it should be empty
-        assert_that(self.shoppingCart.main_page_cart_status()).contains('(empty)')
-        self.shoppingCart.select_cart()
-        # check that 'Your shopping cart is empty.' alert is displayed when you enter the shopping cart
-        assert_that(self.shoppingCart.check_no_contents()).contains('Your shopping cart is empty.')
-
-    @allure.title('First launch, basket empty - logged in')
-    def test_shopping_cart_empty_logged_in(self, setup):
+    @allure.title('Add item to shopping cart from main menu - logged in')
+    def test_add_to_shopping_cart_logged_in(self, setup):
         self.shoppingCart.log_in()
         self.shoppingCart.go_back_to_main_page()
         # check the contents of the cart visible on the main page - it should be empty
@@ -25,10 +17,24 @@ class TestShoppingCart:
         self.shoppingCart.select_cart()
         # check that 'Your shopping cart is empty.' alert is displayed when you enter the shopping cart
         assert_that(self.shoppingCart.check_no_contents()).contains('Your shopping cart is empty.')
+        self.shoppingCart.go_back_to_main_page()
+        self.shoppingCart.select_item()
+        self.shoppingCart.add_to_cart()
+        self.shoppingCart.continue_shopping()
+        self.shoppingCart.hover_over_cart()
+        # check that 1 item was added to the shopping cart and is displayed on main page
+        assert_that(self.shoppingCart.check_item_in_cart_main_page()).contains('1')
+        self.shoppingCart.select_cart()
+        # check that 1 item was added to the shopping cart and is displayed in summary
+        assert_that(self.shoppingCart.check_item_in_cart_summary()).contains('1 Product')
 
-    @allure.title('Add item to shopping cart from main menu - logged in')
-    def test_add_to_shopping_cart_logged_in(self, setup):
-        self.shoppingCart.log_in()
+    @allure.title('Add item to shopping cart from main menu - not logged')
+    def test_add_to_shopping_cart_logged_out(self, setup):
+        # check the contents of the cart visible on the main page - it should be empty
+        assert_that(self.shoppingCart.main_page_cart_status()).contains('(empty)')
+        self.shoppingCart.select_cart()
+        # check that 'Your shopping cart is empty.' alert is displayed when you enter the shopping cart
+        assert_that(self.shoppingCart.check_no_contents()).contains('Your shopping cart is empty.')
         self.shoppingCart.go_back_to_main_page()
         self.shoppingCart.select_item()
         self.shoppingCart.add_to_cart()
