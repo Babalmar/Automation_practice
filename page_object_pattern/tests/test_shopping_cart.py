@@ -46,18 +46,6 @@ class TestShoppingCart:
         # check that 1 item was added to the shopping cart and is displayed in summary
         assert_that(self.shoppingCart.check_item_in_cart_summary()).contains('1 Product')
 
-    @allure.title('Add item to shopping cart from main menu - not logged')
-    def test_add_to_shopping_cart_logged_out(self, setup):
-        self.shoppingCart.select_item()
-        self.shoppingCart.add_to_cart()
-        self.shoppingCart.continue_shopping()
-        self.shoppingCart.hover_over_cart()
-        # check that 1 item was added to the shopping cart and is displayed on main page
-        assert_that(self.shoppingCart.check_item_in_cart_main_page()).contains('1')
-        self.shoppingCart.select_cart()
-        # check that 1 item was added to the shopping cart and is displayed in summary
-        assert_that(self.shoppingCart.check_item_in_cart_summary()).contains('1 Product')
-
     @allure.title('Remove item from the shopping cart in main menu - logged in')
     def test_remove_item_from_shopping_cart_logged_in(self, setup):
         self.shoppingCart.log_in()
@@ -77,7 +65,7 @@ class TestShoppingCart:
     def test_proceed_to_checkout_logged_out(self, setup):
         self.shoppingCart.select_item()
         self.shoppingCart.add_to_cart()
-        self.shoppingCart.proceed_to_checkout_main_page()
+        self.shoppingCart.proceed_to_checkout_from_main_page()
         # check that 1 item was added to the shopping cart and is displayed in summary
         assert_that(self.shoppingCart.check_item_in_cart_summary()).contains('1 Product')
 
@@ -87,7 +75,7 @@ class TestShoppingCart:
         self.shoppingCart.go_back_to_main_page()
         self.shoppingCart.select_item()
         self.shoppingCart.add_to_cart()
-        self.shoppingCart.proceed_to_checkout_main_page()
+        self.shoppingCart.proceed_to_checkout_from_main_page()
         # check that 1 item was added to the shopping cart and is displayed in summary
         assert_that(self.shoppingCart.check_item_in_cart_summary()).contains('1 Product')
 
@@ -127,7 +115,7 @@ class TestShoppingCart:
         self.shoppingCart.change_color()
         self.shoppingCart.change_size()
         self.shoppingCart.add_to_cart_details_view()
-        self.shoppingCart.proceed_to_checkout_main_page()
+        self.shoppingCart.proceed_to_checkout_from_main_page()
         # check that 2 items were added to the shopping cart and are displayed in summary
         assert_that(self.shoppingCart.check_item_in_cart_summary()).contains('2 Products'),
         # check that selected size is L and color is 'White'
