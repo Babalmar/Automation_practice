@@ -2,9 +2,9 @@ import pytest
 import time
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
-from page_object_pattern.pages.login import Login
-from page_object_pattern.pages.shopping_cart import ShoppingCart
-from page_object_pattern.pages.registration import Registration
+from page_object_pattern.pages.login_page import Login
+from page_object_pattern.pages.shopping_cart_page import ShoppingCart
+from page_object_pattern.pages.registration_page import Registration
 
 
 @pytest.fixture()

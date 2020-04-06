@@ -1,7 +1,7 @@
 import json
 from selenium.webdriver import ActionChains
 
-json_file_path = '/helpers/user.json'
+json_file_path = '/var/jenkins_home/workspace/AutomationPractice/helpers/user.json'
 
 
 class ShoppingCart:
