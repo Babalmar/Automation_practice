@@ -125,6 +125,10 @@ class ShoppingCart:
     def check_total_price(self):
         total_price = self.driver.find_element_by_css_selector(self.total_price_css)
         return total_price.text
+
+	def check_size_and_color(self):
+        size_color = self.driver.find_element_by_css_selector(self.size_and_color_css)
+        return size_color.text
         total_price = self.driver.find_element_by_css_selector(self.total_price_css)
         return total_price.text
 
